@@ -80,13 +80,66 @@ const displayMovements = function (movements) {
 displayMovements(account1.movements);
 
 
+// Prie accoounto prideti nauja key propertie username, kuris yra vardo ir pavardes inicialiai(mazosios raides)
 
 const createUsername = function (accs) {
-
-  accs.forEach(acc => acc.username = acc.owner.toLowerCase().split(' ').map(n => n[0]).join(''));
-
+  accs.forEach(a => a.username = a.owner.toLowerCase().split(' ').map(e => e[0]).join(''))
 }
+
 createUsername(accounts);
-console.log(accounts);
+// console.log(account1);
+// console.log(account3);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // const accounts = [account1, account2, account3, account4];
+// const createUsernames = function (accs) {
+
+//   accs.forEach(acc => acc.username = acc.owner.toLowerCase().split(' ').map(n => n[0]).join(''));
+
+// }
+// createUsernames(accounts);
+// console.log(accounts);

@@ -68,9 +68,9 @@ const displayMovements = function (movements) {
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${i + 1} ${type} </div>
-        <div class="movements__value">${mov}</div>
-      </div>
-    `;
+        <div class="movements__value">${mov} €</div >
+      </div >
+  `;
 
     containerMovements.insertAdjacentHTML('afterbegin', html)
 
@@ -79,9 +79,31 @@ const displayMovements = function (movements) {
 }
 displayMovements(account1.movements);
 
+const displayBalance = function (movemnts) {
+  const balance = movemnts.reduce((t, v) => t + v, 0);
+  labelBalance.textContent = `${balance} \u20AC
+`
+}
+
+displayBalance(account1.movements)
+
+
+const displaySummmary = function (movements) {
+  const incomes = movements.filter(a => a > 0).reduce((acc, v) => acc + v, 0);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements.filter(a => a < 0).reduce((acc, v) => acc + v, 0);
+  labelSumOut.textContent = `${Math.abs(out)}€`
+
+  const interest = movements.filter(a => a > 0).map(deposit => deposit * 1.2 / 100).reduce((acc, int) => int >= 1 ? acc + int : acc, 0)
+  labelSumInterest.textContent = `${interest}€`
+}
+
+displaySummmary(account1.movements)
+
+
 
 // Prie accoounto prideti nauja key propertie username, kuris yra vardo ir pavardes inicialiai(mazosios raides)
-
 const createUsername = function (accs) {
   accs.forEach(a => a.username = a.owner.toLowerCase().split(' ').map(e => e[0]).join(''))
 }
@@ -89,9 +111,6 @@ const createUsername = function (accs) {
 createUsername(accounts);
 // console.log(account1);
 // console.log(account3);
-
-
-
 
 
 

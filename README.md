@@ -8,6 +8,13 @@ This is my learning JavaScript project.
 
 Web page published at: [https://sgrazys.github.io/Bankist/](https://sgrazys.github.io/Bankist/)
 
+## 👨🏼‍💻 Data to login
+
+-   user: js PIN: 1111
+-   user: jd PIN: 2222
+-   user: stw PIN: 3333
+-   user: ss PIN: 4444
+
 ## 🎯 Project features/goals
 
 -   DOM manipulation

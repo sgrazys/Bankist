@@ -97,23 +97,18 @@ const displaySummmary = function (acc) {
 }
 
 
-
-
-
 // Prie accoounto prideti nauja key propertie username, kuris yra vardo ir pavardes inicialiai(mazosios raides)
 const createUsername = function (accs) {
   accs.forEach(a => a.username = a.owner.toLowerCase().split(' ').map(e => e[0]).join(''))
 }
 
 createUsername(accounts);
-// console.log(account1);
-// console.log(account3);
 
 // Event handlers
 let currentAccount;
 
 btnLogin.addEventListener('click', function (e) {
-  // FORMOJE ESANTIS BTN'as NEBERELOADINS PUSLAPIO KAI JIS BUS PASPAUSTAS, nesubmitins, (nerefreshins puslapio)
+  // FORMOJE ESANTIS BTN'as NEREFRESHINS PUSLAPIO KAI JIS BUS PASPAUSTAS, nesubmitins.
   e.preventDefault();
 
   currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);

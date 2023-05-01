@@ -77,7 +77,6 @@ const displayMovements = function (movements) {
   });
 
 }
-displayMovements(account1.movements);
 
 const displayBalance = function (movemnts) {
   const balance = movemnts.reduce((t, v) => t + v, 0);
@@ -85,21 +84,19 @@ const displayBalance = function (movemnts) {
 `
 }
 
-displayBalance(account1.movements)
 
-
-const displaySummmary = function (movements) {
-  const incomes = movements.filter(a => a > 0).reduce((acc, v) => acc + v, 0);
+const displaySummmary = function (acc) {
+  const incomes = acc.movements.filter(mov => mov > 0).reduce((acc, sum) => acc + sum, 0);
   labelSumIn.textContent = `${incomes}€`;
 
-  const out = movements.filter(a => a < 0).reduce((acc, v) => acc + v, 0);
+  const out = acc.movements.filter(sum => sum < 0).reduce((acc, sum) => acc + sum, 0);
   labelSumOut.textContent = `${Math.abs(out)}€`
 
-  const interest = movements.filter(a => a > 0).map(deposit => deposit * 1.2 / 100).reduce((acc, int) => int >= 1 ? acc + int : acc, 0)
+  const interest = acc.movements.filter(a => a > 0).map(deposit => deposit * acc.interestRate / 100).reduce((acc, int) => int >= 1 ? acc + int : acc, 0)
   labelSumInterest.textContent = `${interest}€`
 }
 
-displaySummmary(account1.movements)
+
 
 
 
@@ -112,53 +109,34 @@ createUsername(accounts);
 // console.log(account1);
 // console.log(account3);
 
+// Event handlers
+let currentAccount;
 
+btnLogin.addEventListener('click', function (e) {
+  // FORMOJE ESANTIS BTN'as NEBERELOADINS PUSLAPIO KAI JIS BUS PASPAUSTAS, nesubmitins, (nerefreshins puslapio)
+  e.preventDefault();
 
+  currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+  console.log(currentAccount);
 
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Display UI  and message
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}!`
+    containerApp.style.opacity = 100
 
+    // Clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
 
+    // Display movements
+    displayMovements(currentAccount.movements);
 
+    // Display balance
+    displayBalance(currentAccount.movements);
 
+    // Display summary
+    displaySummmary(currentAccount);
 
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // const accounts = [account1, account2, account3, account4];
-// const createUsernames = function (accs) {
-
-//   accs.forEach(acc => acc.username = acc.owner.toLowerCase().split(' ').map(n => n[0]).join(''));
-
-// }
-// createUsernames(accounts);
-// console.log(accounts);
+}) 

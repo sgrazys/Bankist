@@ -213,3 +213,12 @@ btnSort.addEventListener('click', function (e) {
 
 })
 
+
+////// SOME FOR LEARNING
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(document.querySelectorAll('.movements__value'), el => Number(el.textContent.replace('€', '')));
+
+  // console.log(movementsUI);
+
+});

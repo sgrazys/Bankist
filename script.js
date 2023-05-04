@@ -214,73 +214,73 @@ btnSort.addEventListener('click', function (e) {
 })
 
 
-////// SOME FOR LEARNING ////////////
+// ////// SOME FOR LEARNING ////////////
 
-labelBalance.addEventListener('click', function () {
-  const movementsUI = Array.from(document.querySelectorAll('.movements__value'), el => Number(el.textContent.replace('€', '')));
+// labelBalance.addEventListener('click', function () {
+//   const movementsUI = Array.from(document.querySelectorAll('.movements__value'), el => Number(el.textContent.replace('€', '')));
 
-  // console.log(movementsUI);
+//   // console.log(movementsUI);
 
-});
+// });
 
 
-/////// ARAY METHODS PRACTICE //////
+// /////// ARAY METHODS PRACTICE //////
 
-/// 1. CALCULATE HOW MUCH TOTAL WAS DEPOSITED IN THE BANK
+// /// 1. CALCULATE HOW MUCH TOTAL WAS DEPOSITED IN THE BANK
 
-const bankDepositSum = accounts.flatMap(acc => acc.movements)
-  .filter(sum => sum > 0)
-  .reduce((acc, sum) => acc + sum, 0);
+// const bankDepositSum = accounts.flatMap(acc => acc.movements)
+//   .filter(sum => sum > 0)
+//   .reduce((acc, sum) => acc + sum, 0);
 
-console.log(bankDepositSum);
+// console.log(bankDepositSum);
 
-/// 2. HOW MANY DEPOSITS HAVE BEEN IN THE BANK AT LEAST 1000$$
+// /// 2. HOW MANY DEPOSITS HAVE BEEN IN THE BANK AT LEAST 1000$$
 
-const depositsOver1000 = accounts.flatMap(acc => acc.movements)
-  .filter(sum => sum >= 1000).length;
+// const depositsOver1000 = accounts.flatMap(acc => acc.movements)
+//   .filter(sum => sum >= 1000).length;
+
+// // const depositsOver1000_reduce = accounts.flatMap(acc => acc.movements)
+// //   .reduce((count, cur) => cur >= 1000 ? count + 1 : count, 0)
 
 // const depositsOver1000_reduce = accounts.flatMap(acc => acc.movements)
-//   .reduce((count, cur) => cur >= 1000 ? count + 1 : count, 0)
+//   .reduce((count, cur) => cur >= 1000 ? ++count : count, 0)
 
-const depositsOver1000_reduce = accounts.flatMap(acc => acc.movements)
-  .reduce((count, cur) => cur >= 1000 ? ++count : count, 0)
+// console.log(depositsOver1000);
+// console.log(depositsOver1000_reduce)
 
-console.log(depositsOver1000);
-console.log(depositsOver1000_reduce)
+// //Prefixed ++ operator
+// let a = 10;
+// console.log(++a);
+// console.log(a);
 
-//Prefixed ++ operator
-let a = 10;
-console.log(++a);
-console.log(a);
+// /// 3. CREATE AN OBJECT USING REDUCE WICH CONTAINS THE SUM OF DEPOSITS AND WITDRAWALS
+// const { deposit, withdrawals } = accounts.flatMap(sum => sum.movements).reduce((sums, cur) => {
+//   // cur > 0 ? sums.deposit += cur : sums.withdrawals += cur;
+//   sums[cur > 0 ? 'deposit' : 'withdrawals'] += cur
+//   return sums
+// }, { deposit: 0, withdrawals: 0 })
 
-/// 3. CREATE AN OBJECT USING REDUCE WICH CONTAINS THE SUM OF DEPOSITS AND WITDRAWALS
-const { deposit, withdrawals } = accounts.flatMap(sum => sum.movements).reduce((sums, cur) => {
-  // cur > 0 ? sums.deposit += cur : sums.withdrawals += cur;
-  sums[cur > 0 ? 'deposit' : 'withdrawals'] += cur
-  return sums
-}, { deposit: 0, withdrawals: 0 })
+// console.log(deposit);
+// console.log(withdrawals);
 
-console.log(deposit);
-console.log(withdrawals);
+// /// 4. CREATE FUNCTION TO CONVERT ANY STRING  TO A TITLE CASE (this is a nice title ==> This Is a Nice Title)
 
-/// 4. CREATE FUNCTION TO CONVERT ANY STRING  TO A TITLE CASE (this is a nice title ==> This Is a Nice Title)
+// const convertTitleCase = function (title) {
 
-const convertTitleCase = function (title) {
+//   const capitalize = string => string[0].toUpperCase() + string.slice(1)
 
-  const capitalize = string => string[0].toUpperCase() + string.slice(1)
+//   const exepctions = ['a', 'an', 'the', 'but', 'and', 'or', 'in', 'with'];
 
-  const exepctions = ['a', 'an', 'the', 'but', 'and', 'or', 'in', 'with'];
+//   const titleCase = title
+//     .toLowerCase()
+//     .split(' ')
+//     .map(word => exepctions.includes(word) ? word : capitalize(word))
+//     .join(' ');
 
-  const titleCase = title
-    .toLowerCase()
-    .split(' ')
-    .map(word => exepctions.includes(word) ? word : capitalize(word))
-    .join(' ');
+//   return capitalize(titleCase)
 
-  return capitalize(titleCase)
+// }
 
-}
-
-console.log(convertTitleCase('this is a nice title'));
-console.log(convertTitleCase('this is a LONG title, but not too long'));
-console.log(convertTitleCase('and here is anothe title with an EXAMPLE'));
+// console.log(convertTitleCase('this is a nice title'));
+// console.log(convertTitleCase('this is a LONG title, but not too long'));
+// console.log(convertTitleCase('and here is anothe title with an EXAMPLE'));

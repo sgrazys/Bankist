@@ -12,13 +12,11 @@ Web page published at: [https://sgrazys.github.io/Bankist/](https://sgrazys.gith
 
 -   user: js PIN: 1111
 -   user: jd PIN: 2222
--   user: stw PIN: 3333
--   user: ss PIN: 4444
 
 ### 💸 Transfer money from one account to other
 
 -   You can send money only to exsiting user.
--   Choose user's username (js / jd / stw / ss) to send money.
+-   Choose user's username (js / jd ) to send money.
 
 ## 🎯 Project features/goals
 

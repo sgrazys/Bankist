@@ -189,15 +189,43 @@ const updateUI = function (acc) {
   displaySummmary(acc);
 }
 
+const starLogOuttTimer = function () {
+
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0)
+    // In each call, print remaining time in UI
+    labelTimer.textContent = `${min}:${sec}`
+
+    // When we reach 0 seconds stop timer and logout user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Login to get started';
+      containerApp.style.opacity = 0;
+    }
+    //Decrease 1 sec
+    time--
+
+  }
+  // Set time to 5 minutes
+  let time = 120;
+  // Call timer evry second
+  tick()
+  const timer = setInterval(tick, 1000);
+
+  return timer;
+
+}
+
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
 
-// // FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// // // FAKE ALWAYS LOGGED IN
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
-// Experiment with date API
+// // Experiment with date API
 
 
 
@@ -240,7 +268,9 @@ btnLogin.addEventListener('click', function (e) {
 
     // labelDate.textContent = `${year}.${month}.${day}, ${hours}:${minutes}`
 
-
+    //Timer 
+    if (timer) clearInterval(timer);
+    timer = starLogOuttTimer();
 
     // Update UI
     updateUI(currentAccount);
@@ -275,6 +305,10 @@ btnTransfer.addEventListener('click', function (e) {
   //Update UI
   updateUI(currentAccount);
 
+  //Reset the timer
+  clearInterval(timer);
+  timer = starLogOuttTimer()
+
 });
 
 btnLoan.addEventListener('click', function (e) {
@@ -283,20 +317,23 @@ btnLoan.addEventListener('click', function (e) {
   const loanAmount = +inputLoanAmount.value;
 
   if (loanAmount > 0 && currentAccount.movements.some(mov => mov >= loanAmount * 0.1)) {
-
-    // Add movment
-    currentAccount.movements.push(loanAmount);
-
-    //Transfer loan date
-    currentAccount.movementsDates.push(new Date().toISOString());
-
-    // Update the UI
-    updateUI(currentAccount)
-
+    setTimeout(() => {
+      // Add movment
+      currentAccount.movements.push(loanAmount);
+      //Transfer loan date
+      currentAccount.movementsDates.push(new Date().toISOString());
+      // Update the UI
+      updateUI(currentAccount)
+      //Reset the timer
+      clearInterval(timer);
+      timer = starLogOuttTimer();
+    }, 3000)
   }
 
 
   inputLoanAmount.value = ''
+
+
 
 })
 
